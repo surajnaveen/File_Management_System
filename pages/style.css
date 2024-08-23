@@ -1,0 +1,15 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+#container{
+    max-width: 325px;
+    display: flex;
+    flex-direction: column;
+    margin: 30px auto;
+}
+
+.small-notice{
+    margin-top: 10px;
+}

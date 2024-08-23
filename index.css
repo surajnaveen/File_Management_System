@@ -21,6 +21,10 @@ header {
     font-weight: bold;
 }
 
+.logolink:visited{
+    color: white;
+}
+
 nav ul {
     list-style: none;
     display: flex;
