@@ -69,5 +69,5 @@ function signIn(email, password) {
 }
 
 function redirectAfterSubmit() {
-    window.location.href = "/signin.html";
+    window.location.href = "/pages/signin.html";
 }
