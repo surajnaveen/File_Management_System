@@ -2,6 +2,7 @@ body{
     margin: 0;
     padding: 0;
     background-color: white;
+    user-select: none;
 }
 
 #container, #dcontainer{
@@ -13,4 +14,34 @@ body{
 
 .small-notice{
     margin-top: 10px;
+}
+
+ul li {
+    list-style: none;
+}
+
+input[type="file"]::file-selector-button {
+    background-color: #d5d6ff;
+    color: rgb(36, 29, 29);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#submit{
+    margin-top: 15px;
+    border: 0;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+#submit:hover{
+    color: #e6e6ff;
+    background-color: #323241;
+    transition: 0.5s;
+    cursor: pointer;
 }
