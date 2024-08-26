@@ -11,7 +11,7 @@ submit.addEventListener("click",function(){
     .then((userCredential) => {
         // Signed in 
         user = userCredential.user;
-       window.location.href = "/pages/dashboard.html";
+        window.location.href = "/pages/dashboard.html";
         console.log("done")
         // ...
     })

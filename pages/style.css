@@ -50,3 +50,52 @@ input[type="file"]::file-selector-button {
     color: red;
     font-size: small;
 }
+
+#popup {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    background-color: #e9fcff;
+    padding: 20px;
+    border: 2px solid #f5c6cb;
+    z-index: 10;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+}
+
+#closeBtn {
+    background-color: #f6b3ba;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#fileList li:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+.upload-area {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.upload-area.dragover {
+    border-color: #333;
+}
+
+#fileInput {
+    display: none;
+}

@@ -13,13 +13,29 @@
     </header>
     <div id="dcontainer">
         <img src="../images/file-dashboard.jpg" alt="files">
-        <input type="file" id="file">
+        <!-- <input type="file" id="file"> -->
+        <div class="upload-area" id="upload-area">
+            <h2 id="FileNameField">Drag & Drop Files Here</h2>
+            <p>or</p>
+            <button id="browseBtn">Browse Files</button>
+            <input type="file" id="fileInput" multiple>
+        </div>
+        <div id="fileList"></div>
         <button id="submit">Upload</button>
         <ul id="fileList">
-            <li>docs.txt</li>
-            <li>sales.doc</li>
+            <h3>Uploaded Files</h3>
+            <li class="items">docs.txt</li>
+            <li class="items">sales.doc</li>
         </ul>
+        <div id="popup">
+            <h3 id="FileName">Data.txt</h3>
+            <div id="BtnSection">
+                <button id="Download">Download</button>
+                <button id="Delete">Delete</button>
+            </div>
+            <button id="closeBtn">Close</button>
+        </div>
     </div>
-    <script type="module" src="fuctions.js"></script>
+    <script type="module" src="dashboard.js"></script>
 </body>
 </html>
