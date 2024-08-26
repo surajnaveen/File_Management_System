@@ -4,12 +4,29 @@ const uploadArea = document.getElementById('upload-area');
 const fileInput = document.getElementById('fileInput');
 const browseBtn = document.getElementById('browseBtn');
 const FileName = document.getElementById("FileNameField");
-//const fileList = document.getElementById('fileList');
+const UserName = document.getElementById("userName");
+const SignOut = document.getElementById("signOut");
+const userData = JSON.parse(sessionStorage.getItem("user"));
+
+if (!userData) {
+    window.location.href = "signin.html";
+    //return 0;
+}
+
+UserName.innerHTML += `Welcome, ${userData.displayName}`;
+console.log(userData.displayName);
+
 
 listItems.forEach(Items=>{
     Items.addEventListener("click",function() {
         Showpopup();
     })
+})
+
+SignOut.addEventListener("click",function() {
+    // Clearing session data on logout
+    sessionStorage.clear();
+    window.location.href = "../index.html";
 })
 
 PopupClosingBtn.addEventListener("click",function() {
