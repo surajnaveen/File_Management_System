@@ -1,3 +1,5 @@
+import { auth,storage,ref,uploadBytes } from "../firebase/app.js";
+
 const listItems = document.querySelectorAll('li');
 const PopupClosingBtn = document.getElementById("closeBtn");
 const uploadArea = document.getElementById('upload-area');
@@ -6,6 +8,7 @@ const browseBtn = document.getElementById('browseBtn');
 const FileName = document.getElementById("FileNameField");
 const UserName = document.getElementById("userName");
 const SignOut = document.getElementById("signOut");
+const uploadFileBtn = document.getElementById("submit");
 const userData = JSON.parse(sessionStorage.getItem("user"));
 
 if (!userData) {
@@ -84,15 +87,13 @@ fileInput.addEventListener('change', () => {
 
 function handleFiles(files) {
     files = [...files];
-    files.forEach(uploadFile);
+    FileName.innerHTML = files[0].name;
+    uploadFileBtn.addEventListener("click",function () {
+        files.forEach(uploadToTheFB);
+        //uploadToTheFB(files);
+    })
     //files.forEach(previewFile);
-}
-
-function uploadFile(file) {
-    // You can add your file upload logic here
-    // For example, using XMLHttpRequest or Fetch to send the file to the server
-    FileName.innerHTML = file.name;
-    console.log('Uploading:', file);
+    console.log(files);
 }
 
 function previewFile(file) {
@@ -104,4 +105,20 @@ function previewFile(file) {
         li.innerHTML = `<strong>${file.name}</strong> (${Math.round(file.size / 1024)} KB)`;
         fileList.appendChild(li);
     };
+}
+
+function uploadToTheFB(file) {
+    const uid = userData.uid;
+    const fileRef = ref(storage, `uploads/${uid}/${file.name}`);
+    uploadBytes(fileRef, file)
+        .then(() => {
+        // File upload is complete
+        console.log('File uploaded successfully');
+    })
+    .catch((error) => {
+        // Handle the error
+        console.error('Upload failed:', error);
+    });
+
+    
 }
