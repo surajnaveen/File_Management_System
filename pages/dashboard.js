@@ -14,7 +14,6 @@ const userData = JSON.parse(sessionStorage.getItem("user"));
 
 if (!userData) {
     window.location.href = "signin.html";
-    //return 0;
 }
 
 UserName.innerHTML += `Welcome, ${userData.displayName}`;
@@ -112,7 +111,7 @@ function previewFile() {
                     // Get the file name
                     const fileName = itemRef.name;
                     // Append the file name and download link to the list
-                    list.innerHTML += `<li>${fileName}</a></li>`;
+                    list.innerHTML += `<li>${fileName}</li>`;
                 }).catch((error) => {
                     console.error('Error getting download URL:', error);
                 });
@@ -136,6 +135,5 @@ function uploadToTheFB(file) {
         // Handle the error
         console.error('Upload failed:', error);
     });
-
-    
+   
 }

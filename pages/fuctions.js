@@ -3,6 +3,7 @@ import { auth,signInWithEmailAndPassword } from "../firebase/app.js";
 const email = document.getElementById("loggingEmail");
 const password = document.getElementById("loggingPassword");
 const submit = document.getElementById("SubmitSignin");
+const ErrMassage = document.getElementById("loggingError");
 
 submit.addEventListener("click",function(){
     event.preventDefault();
@@ -23,6 +24,7 @@ submit.addEventListener("click",function(){
         // ...
     })
     .catch((error) => {
+        ErrMassage.innerHTML += "Check your Email and Password";
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage,errorCode);

@@ -153,3 +153,7 @@ footer {
         flex-direction: column;
     }
 }
+
+#loggingError{
+    color: red;
+}
