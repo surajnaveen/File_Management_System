@@ -1,6 +1,6 @@
-import { auth,storage,ref,uploadBytes } from "../firebase/app.js";
+import { auth,storage,ref,uploadBytes,listAll,getDownloadURL } from "../firebase/app.js";
 
-const listItems = document.querySelectorAll('li');
+const listItems = document.querySelectorAll(".items");
 const PopupClosingBtn = document.getElementById("closeBtn");
 const uploadArea = document.getElementById('upload-area');
 const fileInput = document.getElementById('fileInput');
@@ -9,6 +9,7 @@ const FileName = document.getElementById("FileNameField");
 const UserName = document.getElementById("userName");
 const SignOut = document.getElementById("signOut");
 const uploadFileBtn = document.getElementById("submit");
+const list = document.getElementById("FileItemList");
 const userData = JSON.parse(sessionStorage.getItem("user"));
 
 if (!userData) {
@@ -17,9 +18,12 @@ if (!userData) {
 }
 
 UserName.innerHTML += `Welcome, ${userData.displayName}`;
-console.log(userData.displayName);
+previewFile();
+console.log(listItems);
 
+console.log(listItems);
 
+let listTags = Object.keys(listItems)
 listItems.forEach(Items=>{
     Items.addEventListener("click",function() {
         Showpopup();
@@ -89,22 +93,34 @@ function handleFiles(files) {
     files = [...files];
     FileName.innerHTML = files[0].name;
     uploadFileBtn.addEventListener("click",function () {
-        files.forEach(uploadToTheFB);
-        //uploadToTheFB(files);
+        //files.forEach(uploadToTheFB);
+        uploadToTheFB(files[0]);
     })
     //files.forEach(previewFile);
     console.log(files);
 }
 
-function previewFile(file) {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onloadend = () => {
-        let li = document.createElement('li');
-        li.innerHTML = `<strong>${file.name}</strong> (${Math.round(file.size / 1024)} KB)`;
-        fileList.appendChild(li);
-    };
+function previewFile() {
+    const folderRef = ref(storage, `uploads/${userData.uid}`);
+    listAll(folderRef)
+        .then((res) => {
+            list.innerHTML = '';
+            // Iterate over each item (file) in the folder
+            res.items.forEach((itemRef) => {
+                    // Get the download URL for each file
+                    getDownloadURL(itemRef).then((url) => {
+                    // Get the file name
+                    const fileName = itemRef.name;
+                    // Append the file name and download link to the list
+                    list.innerHTML += `<li>${fileName}</a></li>`;
+                }).catch((error) => {
+                    console.error('Error getting download URL:', error);
+                });
+            });
+        })
+        .catch((error) => {
+            console.error('Error listing files:', error);
+        });
 }
 
 function uploadToTheFB(file) {
@@ -113,6 +129,7 @@ function uploadToTheFB(file) {
     uploadBytes(fileRef, file)
         .then(() => {
         // File upload is complete
+        location.reload();
         console.log('File uploaded successfully');
     })
     .catch((error) => {

@@ -113,3 +113,12 @@ input[type="file"]::file-selector-button {
 #signOut:hover{
     cursor: pointer;
 }
+
+#FileItemList li{
+    margin-bottom: 10px;
+}
+
+#FileItemList li:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
