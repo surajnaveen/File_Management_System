@@ -1,4 +1,6 @@
 import { auth,storage,ref,uploadBytes,listAll,getDownloadURL,deleteObject,signOut } from "../firebase/app.js";
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+
 
 const listItems = document.getElementById(".items");
 const PopupClosingBtn = document.getElementById("closeBtn");
@@ -25,13 +27,6 @@ previewFile();
 console.log(listItems);
 
 console.log(listItems);
-
-//let listTags = Object.keys(listItems)
-// listItems.forEach(Items=>{
-//     Items.addEventListener("click",function() {
-//         Showpopup();
-//     })
-// })
 
 SignOut.addEventListener("click",function() {
 
@@ -153,6 +148,13 @@ function previewFile() {
 }
 
 function uploadToTheFB(file) {
+
+    if (file.size > MAX_FILE_SIZE) {
+        alert("File size exceeds the limit of 5MB. Please select a smaller file.");
+        location.reload();
+        fileInput.value = ""; // Clear the file input
+    }
+
     const uid = userData.uid;
     const fileRef = ref(storage, `uploads/${uid}/${file.name}`);
     uploadBytes(fileRef, file)
@@ -168,7 +170,6 @@ function uploadToTheFB(file) {
 }
 
 function Showpopup(item) {
-    //document.getElementById("popup").style.display = "block";
     const popup = document.getElementById('popup');
     const fileNameElement = document.getElementById('FileName');
     let fileName = item.dataset.name;
@@ -176,7 +177,6 @@ function Showpopup(item) {
     fileNameElement.textContent = item.dataset.name;
 
     downloadButton.onclick = function() {
-        //window.location.href = item.dataset.url;
         window.open(item.dataset.url, '_blank');
     };
 
@@ -192,14 +192,12 @@ function Showpopup(item) {
 function Deletefile(FileName) {
     const uid = userData.uid;
     const fileRef = ref(storage, `uploads/${uid}/${FileName}`);
-    //.log(`uploads/${uid}/${FileName}`);
     deleteObject(fileRef).then(() => {
         // Remove the item from the list
         popup.style.display = "none"; // Close the popup
         alert("File deleted");
         location.reload();
     }).catch((error) => {
-        alert("File not deleted");
         console.error('Error deleting file:', error);
     });
 };

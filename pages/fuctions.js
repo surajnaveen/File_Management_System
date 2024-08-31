@@ -6,7 +6,7 @@ const submit = document.getElementById("SubmitSignin");
 const ErrMassage = document.getElementById("loggingError");
 
 submit.addEventListener("click",function(){
-    //event.preventDefault();
+
     signInWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
         // Signed in
