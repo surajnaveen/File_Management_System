@@ -48,7 +48,6 @@ nav ul li a {
 }
 
 .hero {
-    background-image: url('images/computer-lab.jpg');
     background-size: cover;
     background-position: center;
     height: 400px;

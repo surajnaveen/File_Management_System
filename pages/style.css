@@ -58,7 +58,7 @@ input[type="file"]::file-selector-button {
     top: 30%;   
     transform: translate(-50%, -50%);
     background-color: #e9fcff;
-    padding: 20px;
+    padding: 15px;
     border: 2px solid #f5c6cb;
     z-index: 10;
     width: 300px;
@@ -125,5 +125,10 @@ input[type="file"]::file-selector-button {
 }
 
 #BtnSection{
-    
+    margin: 10px auto;
+}
+
+#Download,#Delete{
+    cursor: pointer;
+    margin: auto 10px;
 }

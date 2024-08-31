@@ -115,11 +115,8 @@ function handleFiles(files) {
     files = [...files];
     FileName.innerHTML = files[0].name;
     uploadFileBtn.addEventListener("click",function () {
-        //files.forEach(uploadToTheFB);
         uploadToTheFB(files[0]);
     })
-    //files.forEach(previewFile);
-    console.log(files);
 }
 
 function previewFile() {
@@ -162,7 +159,7 @@ function uploadToTheFB(file) {
     .then(() => {
         // File upload is complete
         location.reload();
-        console.log('File uploaded successfully');
+        alert("File uploaded successfully");
     })
     .catch((error) => {
         // Handle the error
