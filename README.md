@@ -9,7 +9,7 @@ This project allows users to preview and download files stored in Firebase Stora
 - **File Downloading**: Allows users to download files directly from Firebase Storage using dynamically generated download links.
 
 ## Try web app
-- [Click here](https://unifile.netlity.app/)
+- [Click here](https://unifile.netlify.app/)
 
 ### 1. Clone the Repository
 ```bash
