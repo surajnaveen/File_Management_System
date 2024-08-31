@@ -172,7 +172,7 @@ function uploadToTheFB(file) {
 function Showpopup(item) {
     const popup = document.getElementById('popup');
     const fileNameElement = document.getElementById('FileName');
-    let fileName = item.dataset.name;
+    let ItemName = item.dataset.name;
 
     fileNameElement.textContent = item.dataset.name;
 
@@ -181,7 +181,7 @@ function Showpopup(item) {
     };
 
     deleteButton.addEventListener('click',function () {
-        Deletefile(fileName);
+        Deletefile(ItemName);
     })
 
     // Show the popup
@@ -194,7 +194,6 @@ function Deletefile(FileName) {
     const fileRef = ref(storage, `uploads/${uid}/${FileName}`);
     deleteObject(fileRef).then(() => {
         // Remove the item from the list
-        popup.style.display = "none"; // Close the popup
         alert("File deleted");
         location.reload();
     }).catch((error) => {
