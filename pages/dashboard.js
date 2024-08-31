@@ -1,4 +1,4 @@
-import { auth,storage,ref,uploadBytes,listAll,getDownloadURL,deleteObject } from "../firebase/app.js";
+import { auth,storage,ref,uploadBytes,listAll,getDownloadURL,deleteObject,signOut } from "../firebase/app.js";
 
 const listItems = document.getElementById(".items");
 const PopupClosingBtn = document.getElementById("closeBtn");
@@ -34,10 +34,32 @@ console.log(listItems);
 // })
 
 SignOut.addEventListener("click",function() {
-    // Clearing session data on logout
-    sessionStorage.clear();
-    window.location.href = "../index.html";
+
+    signOut(auth).then(() => {
+        // Clear all session data
+        // Sign-out successful.
+        sessionStorage.removeItem("user");
+        sessionStorage.removeItem("authToken");
+        sessionStorage.clear();
+        localStorage.clear();
+        clearAllCookies();
+    
+        window.location.href = "../index.html";
+      }).catch((error) => {
+        // An error happened.
+        console.log(error)
+      });
 })
+
+function clearAllCookies() {
+    const cookies = document.cookie.split(";");
+  
+    for (let cookie of cookies) {
+      const eqPos = cookie.indexOf("=");
+      const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+    }
+  }
 
 PopupClosingBtn.addEventListener("click",function() {
     ClosePopUp();
@@ -157,7 +179,8 @@ function Showpopup(item) {
     fileNameElement.textContent = item.dataset.name;
 
     downloadButton.onclick = function() {
-        window.location.href = item.dataset.url;
+        //window.location.href = item.dataset.url;
+        window.open(item.dataset.url, '_blank');
     };
 
     deleteButton.addEventListener('click',function () {

@@ -55,7 +55,7 @@ input[type="file"]::file-selector-button {
     display: none;
     position: fixed;
     left: 50%;
-    top: 30%;
+    top: 30%;   
     transform: translate(-50%, -50%);
     background-color: #e9fcff;
     padding: 20px;
@@ -69,6 +69,7 @@ input[type="file"]::file-selector-button {
 
 #closeBtn {
     background-color: #f6b3ba;
+    border-radius: 5px;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -121,4 +122,8 @@ input[type="file"]::file-selector-button {
 #FileItemList li:hover{
     cursor: pointer;
     text-decoration: underline;
+}
+
+#BtnSection{
+    
 }

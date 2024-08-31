@@ -13,7 +13,6 @@ submitBtn.addEventListener("click",function(){
     event.preventDefault();
     //let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
         if (!emailPattern.test(email.value)) {
             clearAlt()
             Msg.innerHTML += "Please enter a valid email address.<br>";
@@ -64,6 +63,7 @@ function signIn(email, password) {
             });
         })
         .catch((error) => {
+            Msg.innerHTML += "Account Create Fail";
             console.error("Error signing up:", error);
         })
 }

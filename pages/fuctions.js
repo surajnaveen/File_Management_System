@@ -1,4 +1,4 @@
-import { auth,signInWithEmailAndPassword } from "../firebase/app.js";
+import { auth,signInWithEmailAndPassword,onAuthStateChanged } from "../firebase/app.js";
 
 const email = document.getElementById("loggingEmail");
 const password = document.getElementById("loggingPassword");
@@ -6,8 +6,8 @@ const submit = document.getElementById("SubmitSignin");
 const ErrMassage = document.getElementById("loggingError");
 
 submit.addEventListener("click",function(){
-    event.preventDefault();
-    signInWithEmailAndPassword(auth, email.value.trim(), password.value.trim())
+    //event.preventDefault();
+    signInWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
         // Signed in
         //session
@@ -24,6 +24,7 @@ submit.addEventListener("click",function(){
         // ...
     })
     .catch((error) => {
+        ErrMassage.innerHTML = "";
         ErrMassage.innerHTML += "Check your Email and Password";
         const errorCode = error.code;
         const errorMessage = error.message;
